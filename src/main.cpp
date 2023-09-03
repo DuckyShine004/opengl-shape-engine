@@ -1,20 +1,19 @@
-#include <iostream>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include <iostream>
 
-using namespace std; 
+void init(GLFWwindow* window) {
 
-void framebuffer_size_callback(GLFWwindow* window, int width, int height)
-{
-    glViewport(0, 0, width, height);
 }
 
-int main()
-{
-    if (!glfwInit())
-    {
-        cout << "Failed to initialize GLFW" << endl;
-        return -1;
+void display(GLFWwindow* window, double time) {
+    glClearColor(0.0, 0.0, 0.0, 1.0);
+    glClear(GL_COLOR_BUFFER_BIT);
+}
+
+int main() {
+    if (!glfwInit()) {
+        exit(EXIT_FAILURE);
     }
 
     glfwWindowHint(GLFW_SAMPLES, 4);
@@ -22,30 +21,23 @@ int main()
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-    GLFWwindow* window;
-    window = glfwCreateWindow(800, 600, "OpenGL Renderer", NULL, NULL);
-    if (window == NULL)
-    {
-        cout << "Failed to open GLFW window" << endl;
-        return -1;
-    }
+    GLFWwindow* window = glfwCreateWindow(800, 800, "Triangle", NULL, NULL);
+
     glfwMakeContextCurrent(window);
 
-    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-    {
-        cout << "Failed to initialize GLAD" << endl;
-        return -1;
+    if (!gladLoadGLLoader((GLADloadproc) glfwGetProcAddress)) {
+        exit(EXIT_FAILURE);
     }
 
-    glViewport(0, 0, 800, 600);
-    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+    init(window);
 
-    while(!glfwWindowShouldClose(window))
-    {
+    while(!glfwWindowShouldClose(window)) {
+        display(window, glfwGetTime());
         glfwSwapBuffers(window);
         glfwPollEvents();    
     }
 
+    glfwDestroyWindow(window);
     glfwTerminate();
-    return 0;
+    exit(EXIT_SUCCESS);
 }
