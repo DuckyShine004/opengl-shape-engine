@@ -8,7 +8,9 @@
       "args": [
         "-g",
         "-std=c++17",
-        "${workspaceFolder}\\src\\*.cpp",
+        "${workspaceFolder}\\include\\SHADER\\*.cpp",
+        "${workspaceFolder}\\include\\SHADER\\*.h",
+        "${workspaceFolder}\\src\\point.cpp",
         "${workspaceFolder}\\src\\glad.c",
         "-I${workspaceFolder}\\include",
         "-L${workspaceFolder}\\lib",
