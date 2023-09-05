@@ -16,16 +16,11 @@ GLuint createShaderProgram()
     GLint fragCompiled;
     GLint linked;
 
-    const char *vshaderSource =
-        "#version 430 \n"
-        "void main(void) \n"
-        "{gl_Position = vec4(0.0, 0.0, 0.0, 1.0);}";
+    std::string vertShaderStr = readShaderSource("shaders/vertShader.glsl");
+    std::string fragShaderStr = readShaderSource("shaders/fragShader.glsl");
 
-    const char *fshaderSource =
-        "#version 430 \n"
-        "out vec4 color; \n"
-        "void main(void) \n"
-        "{color = vec4(0.0, 0.0, 1.0, 1.0);}";
+    const char *vshaderSource = vertShaderStr.c_str();
+    const char *fshaderSource = fragShaderStr.c_str();
 
     GLuint vShader = glCreateShader(GL_VERTEX_SHADER);
     GLuint fShader = glCreateShader(GL_FRAGMENT_SHADER);
@@ -103,10 +98,11 @@ void init(GLFWwindow *window)
  */
 void display(GLFWwindow *window, double time)
 {
+    glClear(GL_DEPTH_BUFFER_BIT);
+    glClearColor(0.0, 0.0, 0.0, 1.0);
+    glClear(GL_COLOR_BUFFER_BIT);
     glUseProgram(renderingProgram);
-    glDrawArrays(GL_POINTS, 0, 1);
-    // glClearColor(0.0, 0.0, 0.0, 1.0);
-    // glClear(GL_COLOR_BUFFER_BIT);
+    glDrawArrays(GL_TRIANGLES, 0, 3);
 }
 
 /**
