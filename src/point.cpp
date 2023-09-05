@@ -1,6 +1,8 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <SHADER/err.h>
+#include <SHADER/reader.h>
+#include <string>
 #include <iostream>
 
 #define numVAOs 1
